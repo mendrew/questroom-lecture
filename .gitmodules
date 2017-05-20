@@ -1,0 +1,3 @@
+[submodule "deviceMaster"]
+	path = deviceMaster
+	url = https://github.com/mendrew/quest-device-master.git
