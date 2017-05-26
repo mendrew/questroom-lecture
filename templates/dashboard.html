@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<header class="page-header container">
+  <h1>Панель управления</h1>
+</header>
+
+ <div class="panel panel-default">
+   <div class="panel-heading">
+     <h3 class="panel-title">Текущие активные задачи:</h3>
+   </div>
+   <div class="panel-body">
+     <div class='well' id='current_tasks'></div>
+
+     <form class="form-inline">
+       <div class="form-group">
+         <input
+         class="form-control"
+         type="number"
+         id="skip_task_input"
+         placeholder="Номер задачи: ####"
+         pattern="[0-9]{,4}"
+         title="Номер задачи - только цифры"
+         autofocus
+         >
+       </div>
+       <button class="btn btn-default" id="skip_task_button" type="submit" onClick='toggle_skip_task(event)'>Пропустить задачу</button>
+     </form>
+   </div>
+ </div>
+
+{% include "door-control.html" %}
+
+ <div class="panel panel-default">
+   <div class="panel-heading">
+     <h3 class="panel-title">Свет</h3>
+   </div>
+   <div class="panel-body row center-block">
+     <button class="btn btn-default col-md-4" data-light_id="onAll" onClick='turnLight(event)'>Вкл. всё</button>
+     <button class="btn btn-default col-md-4" data-light_id="offAll" onClick='turnLight(event)'>Выкл. всё</button>
+     <button class="btn btn-default col-md-4" data-light_id="startOn" onClick='turnLight(event)'>Вкл. старт</button>
+     <button class="btn btn-default col-md-4" data-light_id="wireOn" onClick='turnLight(event)'>Вкл. провод</button>
+     <button class="btn btn-default col-md-4" data-light_id="fuseOn" onClick='turnLight(event)'>Вкл. предохранитель</button>
+   </div>
+ </div>
+
+<input type="checkbox" id="hd_light_table" class="hide"/>
+<label id="some_label" for="hd_light_table">Расширенное управление освещением</label>
+
+<table class="light_controller_table">
+  <tr>
+    <td><button class="btn btn-default led_set_btn" data-room_led_id="entrance_top" onClick='setRoomLight(event)'>Вход верх:</button></td>
+    <td><input id="entrance_top" value="000000" class="jscolor"></td>
+    <td><button class="btn btn-default led_set_btn" data-room_led_id="entrance_bottom" onClick='setRoomLight(event)'>Вход низ:</button></td>
+    <td><input id="entrance_bottom" value="ff0000" class="jscolor"></td>
+  </tr>
+
+  <tr>
+    <td><button class="btn btn-default led_set_btn" data-room_led_id="main_room_top" onClick='setRoomLight(event)'>Корридор верх:</button></td>
+    <td><input id="main_room_top" value="ff0000" class="jscolor"></td>
+    <td><button class="btn btn-default led_set_btn" data-room_led_id="main_room_bottom" onClick='setRoomLight(event)'>Корридор низ:</button></td>
+    <td><input id="main_room_bottom" value="00ff00" class="jscolor"></td>
+  </tr>
+
+  <tr>
+    <td><button class="btn btn-default led_set_btn" data-room_led_id="engine_room" onClick='setRoomLight(event)'>Машинное отделение:</button></td>
+    <td><input id="engine_room" value="2542FF" class="jscolor"></td>
+  </tr>
+  <tr>
+    <td><button class="btn btn-default led_set_btn" data-room_led_id="captains_bridge" onClick='setRoomLight(event)'>Кап. мостик:</button></td>
+    <td><input id="captains_bridge" value="C116FF" class="jscolor"></td>
+  </tr>
+</table>
+<br/>
+<br/>
+
+
+{% include "box-control.html" %}
+
+<table>
+  <tr><th>Фразы робота</th></tr>
+  <tr><td><button data-sound='sounds/robot_second_time.wav' onClick='playSound(event)'>Стандартная фраза</button></td></tr>
+  <tr><td><button data-sound='sounds/robot_laughter.wav' onClick='playSound(event)'>ХаХаХаХа</button></td></tr>
+  <tr><td><button data-sound='sounds/robot_dont_leave_me_alone.wav' onClick='playSound(event)'>Не оставляйте меня одного</button></td></tr>
+  <tr><td><button data-sound='sounds/symphony.wav' onClick='playSound(event)'>Симфония</button></td></tr>
+  <tr><td><button data-sound='sounds/i_dont_listen_to_you.wav' onClick='playSound(event)'>Вы мне не интересны</button></td></tr>
+  <tr><td><button data-sound='sounds/electric_sheeps.wav' onClick='playSound(event)'>Электроовцы</button></td></tr>
+  <tr><td><button data-sound='sounds/march.wav' onClick='playSound(event)'>Марш</button></td></tr>
+</table>
+<table>
+  <tr><th>Звуковые эффекты</th></tr>
+  <tr><td><button data-sound='coin.wav' onClick='playSound(event)'>Coin</button></td></tr>
+</table>
+
+{% end %}

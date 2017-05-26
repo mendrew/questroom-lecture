@@ -10,7 +10,6 @@ import threading
 import platform
 if platform.system() == 'Windows':
     from KeyboardListener import KeyboardListener
-from hallway_function import *
 import tornado
 from full_quest import *
 import subprocess
@@ -28,10 +27,10 @@ class QuestRoom(threading.Thread):
         sound_manager = None
         captainsBridge_2 = None
         pygame.mixer.init()
-        self.ambient_music = pygame.mixer.Sound("game_ambient.wav")
-        self.final_game_music = pygame.mixer.Sound("final_game.wav")
-        self.win_music = pygame.mixer.Sound("you_win.wav")
-        self.current_music = self.ambient_music
+        # self.ambient_music = pygame.mixer.Sound("game_ambient.wav")
+        # self.final_game_music = pygame.mixer.Sound("final_game.wav")
+        # self.win_music = pygame.mixer.Sound("you_win.wav")
+        # self.current_music = self.ambient_music
 
         self.last_sended_messages = {}
 
@@ -51,7 +50,7 @@ class QuestRoom(threading.Thread):
             captain_bridge_1_comport = "COM4"
             captain_bridge_2_comport = "COM4"
         else:
-            get_tty_script="./get_ttyUSB.sh "
+            get_tty_script="./scripts/get_ttyUSB.sh "
             bashCommand = get_tty_script + "A4033KK5"
             process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 
@@ -120,7 +119,9 @@ class QuestRoom(threading.Thread):
         if self.game_state is None:
             return
 
-        message = {'message': [u" ({}).{}".format(x.id, x.title).encode('utf-8') for x in self.game_state.active_tasks]}
+        message = {'message': [u" ({}).{}".format(
+            x.id, x.title).encode('utf-8') \
+                    for x in self.game_state.active_tasks]}
         message = tornado.escape.json_encode(message)
         try:
             if '42' in clients:
@@ -187,5 +188,3 @@ class QuestRoom(threading.Thread):
 
     def play_robot(self, sound):
         self.sound_manager.play_sound(sound)
-
-

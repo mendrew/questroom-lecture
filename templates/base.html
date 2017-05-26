@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ static_url("dashboard.css") }}">
+        <link rel="stylesheet" href="{{ static_url("lib/bootstrap/css/bootstrap.css") }}">
+    </head>
+    <body class="page-body container">
+      {% include "navigation.html" %}
+
+      {% block content %}{% end %}
+
+      <script src="{{ static_url("lib/jscolor.js") }}"></script>
+      <script src="{{ static_url("lib\/jquery.min.js") }}"></script>
+
+      <script src="{{ static_url("lib/bootstrap/js/bootstrap.js") }}"></script>
+      <script src="{{ static_url("js/dashboard.js") }}"></script>
+    </body>
+</html>

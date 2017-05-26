@@ -40,34 +40,45 @@ used_buttons = []
 class IndexHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('index.html')
+        self.render('templates/index.html')
 
 
 class DashboardHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('dashboard.html')
+        self.render('templates/dashboard.html')
+
+class IntroductionHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    def get(self):
+        self.render('templates/introduction.html')
+
+class MercuryHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    def get(self):
+        self.render('templates/mercury.html')
 
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self, *args):
-        self.id = self.get_argument("Id")
-        self.stream.set_nodelay(True)
-        if self.id in clients:
-            del clients[self.id]
-        clients[self.id] = { "id": self.id, "object": self }
+        # self.id = self.get_argument("Id")
+        # self.stream.set_nodelay(True)
+        # if self.id in clients:
+        #     del clients[self.id]
+        # clients[self.id] = { "id": self.id, "object": self }
 
-        id_str = str(self.id)
-        # print("quest last_sended_messages: {}".format(quest_room.last_sended_messages))
+        # id_str = str(self.id)
+        # # print("quest last_sended_messages: {}".format(quest_room.last_sended_messages))
 
-        init_data = {'init': 'True'}
-        self.write_message(init_data)
+        # init_data = {'init': 'True'}
+        # self.write_message(init_data)
 
-        if id_str in quest_room.last_sended_messages:
-            last_data = quest_room.last_sended_messages[id_str]
-            self.write_message(last_data)
+        # if id_str in quest_room.last_sended_messages:
+        #     last_data = quest_room.last_sended_messages[id_str]
+        #     self.write_message(last_data)
 
-        quest_room.send_state(None)
+        # quest_room.send_state(None)
+        pass
 
     def on_message(self, jsonMessage):
         message = json.loads(jsonMessage)
@@ -109,8 +120,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
 
     def on_close(self):
-        if self.id not in clients: return
-        del clients[self.id]
+        pass
+        # if self.id not in clients: return
+        # del clients[self.id]
 
     def get_buttons(self, device_id):
         return all_buttons[(device_id-1)*BUTTONS_NUM:device_id*BUTTONS_NUM]
@@ -118,19 +130,22 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 app = tornado.web.Application([
     (r'/', IndexHandler),
     (r'/dashboard', DashboardHandler),
+    (r'/introduction', IntroductionHandler),
+    (r'/mercury', MercuryHandler),
     (r'/socket', WebSocketHandler),
     ],
     static_path=os.path.join(os.path.dirname(__file__), "static"),
     autoreload=True,
+    debug=True
 )
 
 if __name__ == '__main__':
     parse_command_line()
     app.listen(options.port)
-    sound_manager = SoundManager()
-    sound_manager.daemon = True
-    sound_manager.start()
-    quest_room = QuestRoom(clients)
-    quest_room.sound_manager = sound_manager
-    quest_room.start()
+    # sound_manager = SoundManager()
+    # sound_manager.daemon = True
+    # sound_manager.start()
+    # quest_room = QuestRoom(clients)
+    # quest_room.sound_manager = sound_manager
+    # quest_room.start()
     tornado.ioloop.IOLoop.instance().start()
