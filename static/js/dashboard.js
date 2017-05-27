@@ -2,7 +2,7 @@ function getFormattedTaskHtml(messagesStr) {
   var html = '';
   var messages = messagesStr.split(',');
   messages.forEach((message) => {
-    html += '<span class="label label-default">' + message +
+    html += '<span class="current-tasks__task label label-default">' + message +
       '</span>&nbsp;';
   });
   return html;
@@ -13,10 +13,10 @@ function initWebSocket() {
   if ("WebSocket" in window) {
     window.ws = new WebSocket("ws://"+window.location.hostname+":8888/socket?Id=42");
     ws.onopen = function() {
-      test = 'Connected, Reconnected, Broken, Connected, Reconnected, Broken, Connected, Reconnected, Broken';
+      test = 'Connected';
       var message = getFormattedTaskHtml(test);
       messageContainer.innerHTML = message;
-      //ws.send('{"message": "get_state"}')
+      ws.send('{"message": "get_state"}')
     };
     ws.onmessage = function (evt) {
       var received_msg = JSON.parse(evt.data);

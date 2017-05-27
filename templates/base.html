@@ -5,13 +5,17 @@
         <link rel="stylesheet" href="{{ static_url("dashboard.css") }}">
         <link rel="stylesheet" href="{{ static_url("lib/bootstrap/css/bootstrap.css") }}">
     </head>
-    <body class="page-body container">
+    <body class="page-body container-fluid">
       {% include "navigation.html" %}
 
-      {% block content %}{% end %}
+      <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+          {% block content %}{% end %}
+        </div>
+      </div>
 
       <script src="{{ static_url("lib/jscolor.js") }}"></script>
-      <script src="{{ static_url("lib\/jquery.min.js") }}"></script>
+      <script src="{{ static_url("lib/jquery.min.js") }}"></script>
 
       <script src="{{ static_url("lib/bootstrap/js/bootstrap.js") }}"></script>
       <script src="{{ static_url("js/dashboard.js") }}"></script>

@@ -2,16 +2,16 @@
 
 {% block content %}
 
-<header class="page-header container">
+<header class="page-header">
   <h1>Панель управления</h1>
 </header>
 
- <div class="panel panel-default">
+ <div class="panel panel-default current-tasks">
    <div class="panel-heading">
-     <h3 class="panel-title">Текущие активные задачи:</h3>
+     <h3 class="panel-title current-tasks__title">Текущие активные задачи:</h3>
    </div>
    <div class="panel-body">
-     <div class='well' id='current_tasks'></div>
+     <div class='current-tasks__list well col-xs-12' id='current_tasks'></div>
 
      <form class="form-inline">
        <div class="form-group">
@@ -23,6 +23,7 @@
          pattern="[0-9]{,4}"
          title="Номер задачи - только цифры"
          autofocus
+         autocomplete="off"
          >
        </div>
        <button class="btn btn-default" id="skip_task_button" type="submit" onClick='toggle_skip_task(event)'>Пропустить задачу</button>

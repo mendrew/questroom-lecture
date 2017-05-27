@@ -7,8 +7,30 @@
 </header>
 
 
+<nav aria-label="...">
+  <ul class="pager">
+    <li class="previous">
+      <a href="/dashboard"><span aria-hidden="true">&larr;</span>
+      Панель управления
+      </a>
+    </li>
+    <li class="next"><a href="/mercury">Meркурий <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+
 <p>
-  <a class="btn btn-primary" role="button" data-toggle="collapse"
+  <button
+    type="button"
+    class="btn btn-warning"
+    data-light_id="introStart"
+    onClick='turnLight(event)'>
+
+    Свет приглушенно белый.
+  </button>
+</p>
+
+<p>
+  <a class="btn btn-info" role="button" data-toggle="collapse"
     href="#presenterWeAreGointTo" aria-expanded="true" aria-controls="collapseExample">
     + Ведущий
   </a>
@@ -22,6 +44,7 @@
 <p>
   <a class="btn btn-primary" role="button" data-toggle="collapse"
     href="#computerSystemFlyMode" aria-expanded="true" aria-controls="collapseExample">
+    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
     + Бортовой компьютер
   </a>
 </p>
@@ -32,7 +55,7 @@
 </div>
 
 <p>
-  <a class="btn btn-primary" role="button" data-toggle="collapse"
+  <a class="btn btn-info" role="button" data-toggle="collapse"
     href="#presenterLetsGoLook" aria-expanded="true" aria-controls="collapseExample">
     + Ведущий
   </a>
@@ -45,28 +68,59 @@
 
 <p>
   <a class="btn btn-primary" role="button" data-toggle="collapse"
-  href="#computerSystemFlyMode" aria-expanded="true" aria-controls="collapseExample">
-  <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-  + Бортовой компьютер. Внимание
+    href="#computerAttensionMercury" aria-expanded="true" aria-controls="collapseExample">
+    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+    + Бортовой компьютер. Внимание
+  </a>
+</p>
+<div class="collapse" id="computerAttensionMercury">
+  <div class="well">
+    Внимание! Внимание! Приближаемся к Меркурию! Займите позиции на капитанском
+    мостике.
+  </div>
+</div>
 
+<p>
+  <button type="button" class="btn btn-warning">
+    Свет желто-оранжевый.
+  </button>
+</p>
+
+<p>
+  <a class="btn btn-info" role="button" data-toggle="collapse"
+    href="#presenterNeedToOpenCaptainsDoors" aria-expanded="true" aria-controls="collapseExample">
+    + Ведущий. Нужно открыть двери
+  </a>
+</p>
+<div class="collapse" id="presenterNeedToOpenCaptainsDoors">
+  <div class="well">
+    Нужно открыть двери на кап мостик. (например, в одном из ящиков код нормальными цифрами и расшифровка)
+  </div>
+</div>
 
 <p>
   <a class="btn btn-primary" role="button" data-toggle="collapse"
-    href="#computerSystemFlyMode" aria-expanded="true" aria-controls="collapseExample">
-    + Бортовой компьютер
+    href="#computerDataFromMercury" aria-expanded="true" aria-controls="collapseExample">
+    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+    + Бортовой компьютер. Поступили данные с меркурия
   </a>
 </p>
-<div class="collapse" id="computerSystemFlyMode">
+<div class="collapse" id="computerDataFromMercury">
   <div class="well">
-    Системы корабля переведены в режим полета.
+    Поступили данные с поверхности Меркурия.
   </div>
 </div>
-  </a>
-</p>
-<div class="collapse" id="computerSystemFlyMode">
-  <div class="well">
-    Системы корабля переведены в режим полета.
-  </div>
-</div>
+
+<nav aria-label="...">
+  <ul class="pager">
+    <li class="previous">
+      <a href="/dashboard"><span aria-hidden="true">&larr;</span>
+      Панель управления
+      </a>
+    </li>
+    <li class="next"><a href="/mercury">Meркурий <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+
 
 {% end %}
