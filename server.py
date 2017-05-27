@@ -61,23 +61,23 @@ class MercuryHandler(tornado.web.RequestHandler):
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self, *args):
-        # self.id = self.get_argument("Id")
-        # self.stream.set_nodelay(True)
-        # if self.id in clients:
-        #     del clients[self.id]
-        # clients[self.id] = { "id": self.id, "object": self }
+        self.id = self.get_argument("Id")
+        self.stream.set_nodelay(True)
+        if self.id in clients:
+            del clients[self.id]
+        clients[self.id] = { "id": self.id, "object": self }
 
-        # id_str = str(self.id)
-        # # print("quest last_sended_messages: {}".format(quest_room.last_sended_messages))
+        id_str = str(self.id)
+        # print("quest last_sended_messages: {}".format(quest_room.last_sended_messages))
 
-        # init_data = {'init': 'True'}
-        # self.write_message(init_data)
+        init_data = {'init': 'True'}
+        self.write_message(init_data)
 
-        # if id_str in quest_room.last_sended_messages:
-        #     last_data = quest_room.last_sended_messages[id_str]
-        #     self.write_message(last_data)
+        if id_str in quest_room.last_sended_messages:
+            last_data = quest_room.last_sended_messages[id_str]
+            self.write_message(last_data)
 
-        # quest_room.send_state(None)
+        quest_room.send_state(None)
         pass
 
     def on_message(self, jsonMessage):
@@ -145,7 +145,7 @@ if __name__ == '__main__':
     # sound_manager = SoundManager()
     # sound_manager.daemon = True
     # sound_manager.start()
-    # quest_room = QuestRoom(clients)
+    quest_room = QuestRoom(clients)
     # quest_room.sound_manager = sound_manager
-    # quest_room.start()
+    quest_room.start()
     tornado.ioloop.IOLoop.instance().start()
