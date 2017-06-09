@@ -15,15 +15,24 @@ function initWebSocket() {
     ws.onopen = function() {
       test = 'Connected';
       var message = getFormattedTaskHtml(test);
-      messageContainer.innerHTML = message;
+      if (messageContainer) {
+        messageContainer.innerHTML = message;
+      }
       ws.send('{"message": "get_state"}')
     };
     ws.onmessage = function (evt) {
       var received_msg = JSON.parse(evt.data);
       var received_tasks = decodeURI(received_msg.message);
       var message = getFormattedTaskHtml(received_tasks);
-      messageContainer.innerHTML = message;
+      if (messageContainer) {
+        messageContainer.innerHTML = message;
+      }
     };
+
+    ws.onclose = function(evt) {
+      ws = null;
+      setTimeout(function(){initWebSocket()}, 5000);
+    }
   }
 }
 

@@ -5,8 +5,8 @@
       success_requirements:
         [REQ_QUEST_INIT]
       success_actions:
-        # [AC_ADD_ROBOT_PUZZLE, AC_PRESS_HERABORA]
-        [AC_ADD_CONNECT_WIRE]
+        [AC_ADD_ROBOT_PUZZLE]
+        # [AC_ADD_CONNECT_WIRE]
         # [AC_ADD_CHECK_ENGINE_AND_BATTERIES, AC_ALLOW_DOOR_OPEN]
         # [AC_ADD_END_GAME_TASK, AC_FINAL_GAME_MUSIC_START]
       failure_requirements:
@@ -142,7 +142,8 @@
       success_requirements:
         [REQ_ROBOT_ASSEMBLED]
       success_actions:
-        [AC_DISABLE_RADIO, AC_ROBOT_SAY_RIDDLE, AC_ADD_ROBOT_DISASSEMBLED, AC_ADD_COMMUTATOR_PUZZLE, AC_ENABLE_ROBOT_HEAD_ROOMS_COLORS]
+        [AC_ADD_COMMUTATOR_PUZZLE]
+        # [AC_DISABLE_RADIO, AC_ROBOT_SAY_RIDDLE, AC_ADD_ROBOT_DISASSEMBLED, AC_ADD_COMMUTATOR_PUZZLE, AC_ENABLE_ROBOT_HEAD_ROOMS_COLORS]
       failure_requirements:
         []
       failure_actions:

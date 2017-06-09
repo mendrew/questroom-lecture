@@ -37,9 +37,10 @@ CB_SLAVE_2="CB_SLAVE_2"
 hallwayPuzzles = "hallwayPuzzles"
 
 class SOUNDS:
-    BOX_OPEN = 'coin.wav'
+    BOX_OPEN = 'sounds/coin.wav'
     ROBOT_SAY_RIDDLE_FIRST_TIME = 'full_robot.wav'
     ROBOT_SAY_RIDDLE_SECOND_TIME = 'robot_second_time.wav'
+
 
 class ButtonsIdTable:
     WIRE_CONNECTION = 11
@@ -249,9 +250,27 @@ def REQ_QUEST_INIT(master, task, game_state):
     # close doors
     master.setRelays(CB_SLAVE_2, [1,1,1,1])
 
-    AC_ENABLE_INIT_LIGHTS(master, task, game_state)
+    AC_ENABLE_INTRO_START_LIGHT(master, task, game_state)
     return True
 
+# **************************************
+# Lecture tasks
+
+def AC_ENABLE_INTRO_START_LIGHT(master, task, game_state):
+    WHITE_SNOW = colorTo12Bit(0xFFFAFA)
+    setRoomLight(master, ROOM_LEDS.ENTRANCE_TOP, WHITE_SNOW)
+    setRoomLight(master, ROOM_LEDS.ENTRANCE_BOTTOM,
+            WHITE_SNOW)
+    setRoomLight(master, ROOM_LEDS.ENGINE_ROOM, WHITE_SNOW)
+    setRoomLight(master, ROOM_LEDS.MAIN_ROOM_TOP, WHITE_SNOW)
+    setRoomLight(master, ROOM_LEDS.MAIN_ROOM_BOTTOM, WHITE_SNOW)
+    setRoomLight(master, ROOM_LEDS.CAPTAINTS_BRIDGE, WHITE_SNOW)
+
+    print("Enable intro start Light")
+
+
+
+# **************************************
 def AC_ENABLE_INIT_LIGHTS(master, task, game_state):
     # Init Lights
     setRoomLight(master, ROOM_LEDS.ENTRANCE_TOP, COLORS.NONE)

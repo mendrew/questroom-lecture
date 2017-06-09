@@ -5,7 +5,6 @@ import threading
 import platform
 if platform.system() == 'Windows':
     from KeyboardListener import KeyboardListener
-from hallway_function import *
 import tornado
 from full_quest import *
 from utils import colorTo12Bit
@@ -41,8 +40,8 @@ class QuestRoom(threading.Thread):
         print("quest room thread start")
         global master
         master = DeviceMaster()
-        #hallwayPort = "/dev/tty.usbserial-A4033KK5"
-        if platform.system() == 'Windows':
+        hallwayPort = "/dev/tty.usbserial-A4033KK5"
+        if True or platform.system() == 'Windows':
             hallway_comport = "COM4"
             captain_bridge_1_comport = "COM4"
             captain_bridge_2_comport = "COM3"
@@ -119,7 +118,7 @@ class QuestRoom(threading.Thread):
         self.last_sended_messages[str_id] = message
 
 
-    def send_state(self, message):
+    def send_state(self, message=None):
         if self.game_state is None:
             return
 
@@ -162,6 +161,10 @@ class QuestRoom(threading.Thread):
         elif light_id == "fuseOn":
             # print("Command light to fuse insert ")
             AC_ENABLE_FUSE_ROOMS_LIGHT(master, None, None)
+        elif light_id == "introStart":
+            AC_ENABLE_INTRO_START_LIGHT(master, None, None)
+        else:
+            print("we don't handle turn_ligth: {}".format(light_id))
 
     def set_room_light(self, room_led_id, in_color):
         # convert color range from 255 to 4096
